@@ -11,4 +11,11 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
+    let usuario = sessionStorage.getItem('user');
+    if(usuario == null){
+        alert("No hay usuario loggeado")
+        location.href = "login.html";
+    } else {
+        document.getElementById("usuario").innerHTML = usuario;
+    }
 });
