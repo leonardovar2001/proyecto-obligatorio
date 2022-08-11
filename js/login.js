@@ -1,8 +1,9 @@
 function login(){
     let usuario= document.getElementById('nombre').value;
-    let clave= document.getElementById('contrasena').value;
+    let contrasena= document.getElementById('contrasena').value;
 
     if(usuario!="" && contrasena!=""){
+        sessionStorage.setItem('user', usuario);
         location.href='index.html';
     } else {
         alert("Usuario y contraseña son requeridos")
