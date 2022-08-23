@@ -4,7 +4,7 @@ function login(){
 
     if(usuario!="" && contrasena!=""){
         sessionStorage.setItem('user', usuario);
-        location.href='index.html';
+        location.href='products.html';
     } else {
         alert("Usuario y contraseña son requeridos")
     }

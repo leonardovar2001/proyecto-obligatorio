@@ -30,13 +30,6 @@ function showCategoriesList(array){
 }
 
 document.addEventListener("DOMContentLoaded", function(){
-    let usuario = sessionStorage.getItem('user');
-    if(usuario == null){
-        alert("No hay usuario loggeado")
-        location.href = "login.html";
-    } else {
-        document.getElementById("usuario").innerHTML = usuario;
-    }
     getJSONData(PRODUCTS_URL2).then(function(resultObj){
         if (resultObj.status === "ok")
         {
@@ -44,4 +37,11 @@ document.addEventListener("DOMContentLoaded", function(){
             showCategoriesList(categoriesArray);
         }
     });
+    let usuario = sessionStorage.getItem('user');
+    if(usuario == null){
+        alert("No hay usuario loggeado")
+        location.href = "login.html";
+    } else {
+        document.getElementById("usuario").innerHTML = usuario;
+    }
 });
