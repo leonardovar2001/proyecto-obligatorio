@@ -30,14 +30,16 @@ function showCategoriesList(array){
 }
 
 document.addEventListener("DOMContentLoaded", function(){
-    getJSONData(PRODUCTS_URL2).then(function(resultObj){
+    let categoria = localStorage.getItem('catID');
+    getJSONData(PRODUCTS_URL + categoria + ".json").then(function(resultObj){
         if (resultObj.status === "ok")
         {
             categoriesArray = resultObj.data;
             showCategoriesList(categoriesArray);
+            document.getElementById("tituloProducts").innerHTML=categoriesArray.catName;
         }
     });
-    let usuario = sessionStorage.getItem('user');
+    let usuario = localStorage.getItem('user');
     if(usuario == null){
         alert("No hay usuario loggeado")
         location.href = "login.html";

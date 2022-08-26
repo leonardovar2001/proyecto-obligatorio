@@ -3,7 +3,7 @@ function login(){
     let contrasena= document.getElementById('contrasena').value;
 
     if(usuario!="" && contrasena!=""){
-        sessionStorage.setItem('user', usuario);
+        localStorage.setItem('user', usuario);
         location.href='products.html';
     } else {
         alert("Usuario y contraseña son requeridos")
