@@ -10,6 +10,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -31,17 +32,45 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
+            <p class="nav-link" id="usuario">hola</p>
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <main>
+    <div class="container" id="contenedor">
+    </div>
+    <br><br>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <h4>Comentarios</h4>
+      <ul id="valoracion"></ul>
+    </div>
+
+    <br><br>
+    <div class="container">
+      <h4>Comentarios</h4>
+      <div id="comentar">
+        <div>
+          <p>Tu opinión:</p>
+          <textarea name="nuevoComentario" id="nuevoComentario"></textarea>
+        </div>
+        <br>
+        <div>
+            <p>Tu puntuación:</p>
+          <select name="estrellas" id="estrellas">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <br>
+        <button type="submit">Enviar</button>
       </div>
     </div>
+
   </main>
   <footer class="text-muted">
     <div class="container">
