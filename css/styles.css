@@ -5,6 +5,11 @@
   font-family: 'Raleway', serif !important;
 }
 
+#relacionados{
+  display: flex;
+  gap: 20px;
+}
+
 .jumbotron .display-4 {
   font-weight: bold;
 }
@@ -187,4 +192,9 @@ a.custom-card:hover {
 
 .checked {
   color: orange;
+}
+
+.container img:hover{
+  opacity: 0.5;
+  cursor: pointer;
 }

@@ -1,6 +1,11 @@
 let producto = []
 let comentarios = []
 
+function setProductID(id) {
+    localStorage.setItem("productID", id);
+    window.location = "product-info.html"
+}
+
 function mostrarProducto(array){
     let htmlContentToAppend = "";
        
@@ -51,11 +56,28 @@ function mostrarComentarios(array){
 
         htmlContentToAppend += `
         <li>
-            <p><strong>`+ nota.user +`</strong> - `+ nota.dateTime +` - `+ nota.score +`${estrellas(nota.score)}</span></p> 
+            <p><strong>`+ nota.user +`</strong> - `+ nota.dateTime +` - `+ nota.score +`${estrellas(nota.score)}</p> 
             <p> `+ nota.description +`</p> 
         </li>
         `
         document.getElementById("valoracion").innerHTML=htmlContentToAppend;
+    }
+}
+
+
+
+function mostrarProductosRecomendados(array){
+    let htmlContentToAppend = "";
+    for(let i = 0; i < array.relatedProducts.length; i++){ 
+        let recomendados = array.relatedProducts[i];
+
+        htmlContentToAppend += `
+        <div onclick="setProductID(${recomendados.id})">
+            <img src="${recomendados.image}" alt="product image" width="225" height="225" class="img-thumbnail"><br>
+            <p>${recomendados.name}</p>
+        </div>
+        `
+        document.getElementById("relacionados").innerHTML=htmlContentToAppend;
     }
 }
 
@@ -67,6 +89,8 @@ document.addEventListener("DOMContentLoaded", function(){
         {
             producto = resultObj.data;
             mostrarProducto(producto);
+            console.log(producto.relatedProducts[0].image)
+            mostrarProductosRecomendados(producto);
         }
     });
     getJSONData(PRODUCT_INFO_COMMENTS_URL + articulo + ".json").then(function(resultObj){

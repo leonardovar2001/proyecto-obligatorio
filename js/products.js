@@ -104,11 +104,4 @@ document.addEventListener("DOMContentLoaded", function(){
         showCategoriesList(listaFiltrada);
 
     });
-    let usuario = localStorage.getItem('user');
-    if(usuario == null){
-        alert("No hay usuario loggeado")
-        location.href = "login.html";
-    } else {
-        document.getElementById("usuario").innerHTML = usuario;
-    }
 });
