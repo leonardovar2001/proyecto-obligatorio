@@ -198,3 +198,8 @@ a.custom-card:hover {
   opacity: 0.5;
   cursor: pointer;
 }
+
+#btnCarrito{
+  padding: 0.5rem;
+  text-align: center;
+}

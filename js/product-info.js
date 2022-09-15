@@ -1,36 +1,75 @@
-let producto = []
-let comentarios = []
+let producto = [];
+let comentarios = [];
+let carrito = [];
 
 function setProductID(id) {
-    localStorage.setItem("productID", id);
+    localStorage.setItem('productID', id);
     window.location = "product-info.html"
 }
 
-function mostrarProducto(array){
+function setCarritoID(array) {
+    localStorage.setItem('carritoID', JSON.stringify(array));
+    //window.location = "product-info.html"
+}
+
+function getCatID(){
+    window.location = "products.html";
+}
+
+function getCarrito(){
+    let listaCompra = localStorage.getItem('carritoID');
+    if(listaCompra == null){
+        carrito = [];
+    } else {
+        carrito = JSON.parse(listaCompra);
+    }
+}
+
+function agregarCarrito(array){
+    getCarrito();
+    if ((carrito.find(element => element.id == array.id)) != undefined){
+        carrito[carrito.indexOf(carrito.find(element => element.id == array.id))].cantidad++
+        setCarritoID(carrito)
+    } else {
+        carrito.push(array)
+        setCarritoID(carrito)
+    }
+}
+
+
+function mostrarProducto(array, i){
     let htmlContentToAppend = "";
        
     htmlContentToAppend += `
-            <div class="row">
-                <div class="list-group">
-                    <br>
-                <h2>${array.name}</h2><hr><br>
-                    <h4><strong>Precio</strong></h4> 
-                        <p>${array.cost} ${array.currency}</p><br>
-                    <h4><strong>Descripción</strong></h4> 
-                        <p>${array.description}</p><br>
-                    <h4><strong>Categoría</strong></h4> 
-                        <p>${array.category}</p><br>
-                    <h4><strong>Cantidad de Vendidos</strong></h4> 
-                        <p>${array.soldCount}</p><br>
-                    <h4><strong>Imágenes ilustrativas</strong></h4>
-                    <div> 
-                    <img src="${array.images[0]}" alt="product image" width="225" height="225" class="img-thumbnail">
-                    <img src="${array.images[1]}" alt="product image" width="225" height="225" class="img-thumbnail">
-                    <img src="${array.images[2]}" alt="product image" width="225" height="225" class="img-thumbnail">
-                    <img src="${array.images[3]}" alt="product image" width="225" height="225" class="img-thumbnail">
+            <div class="row mt-5">
+                <div class="col-lg-5 col-md-12 col-12">
+                    <img src="${array.images[i]}" alt="principal" id="imagenPrincipal" class="img-fluid w-100 pb-1">
+                    <div class="small-img-group">
+                        <div class="small-img-col">
+                            <img src="${array.images[0]}" onclick="mostrarProducto(producto, 0);" alt="image" class="small-img" width="100%">
+                        </div>
+                        <div class="small-img-col">
+                            <img src="${array.images[1]}" onclick="mostrarProducto(producto, 1);" alt="image" class="small-img" width="100%">
+                        </div>
+                        <div class="small-img-col">
+                            <img src="${array.images[2]}" onclick="mostrarProducto(producto, 2);" alt="image" class="small-img" width="100%">
+                        </div>
+                        <div class="small-img-col">
+                            <img src="${array.images[3]}" onclick="mostrarProducto(producto, 3);" alt="image" class="small-img" width="100%">
+                        </div>
                     </div>
                 </div>
+                <div class="col-lg-6 col-md-12 col-12">
+                <p onclick="getCatID()" style="cursor: pointer;"><strong>Categoria: ${array.category}</strong></p>
+                <h3 class="py-4"><strong>${array.name}</strong></h3>
+                    <h2><strong>${array.cost} ${array.currency}</strong></h2>
+                    <p>Vendidos hasta el momento: ${array.soldCount}</p> 
+                    <h4 class="mt-4 mb-3"><strong>Sobre este producto:</strong></h4> 
+                        <p>${array.description}</p>
+                    <button class="btn btn-primary" type="button" id="btnCarrito" style="width="20px"">Agregar al Carrito</button>
+                </div>
             </div>
+            <br>
         `  
         document.getElementById("contenedor").innerHTML=htmlContentToAppend;
 }
@@ -55,7 +94,7 @@ function mostrarComentarios(array){
         let nota = array[i];
 
         htmlContentToAppend += `
-        <li>
+        <li class="list-group-item">
             <p><strong>`+ nota.user +`</strong> - `+ nota.dateTime +` - `+ nota.score +`${estrellas(nota.score)}</p> 
             <p> `+ nota.description +`</p> 
         </li>
@@ -88,9 +127,12 @@ document.addEventListener("DOMContentLoaded", function(){
         if (resultObj.status === "ok")
         {
             producto = resultObj.data;
-            mostrarProducto(producto);
-            console.log(producto.relatedProducts[0].image)
+            producto.cantidad = 1;
+            mostrarProducto(producto, 0);
             mostrarProductosRecomendados(producto);
+            document.getElementById("btnCarrito").addEventListener("click", function(){
+                agregarCarrito(producto)
+            });
         }
     });
     getJSONData(PRODUCT_INFO_COMMENTS_URL + articulo + ".json").then(function(resultObj){
