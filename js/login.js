@@ -10,7 +10,12 @@ function login(){
     }
 }
 
+function deslogear(){
+    localStorage.removeItem("user");
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
+    deslogear();
     document.getElementById('inicio').addEventListener('click', ()=>{
         login();
     })

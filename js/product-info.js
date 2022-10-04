@@ -25,17 +25,30 @@ function getCarrito(){
     }
 }
 
-function agregarCarrito(array){
+function agregarCarrito(array, f){
     getCarrito();
     if ((carrito.find(element => element.id == array.id)) != undefined){
-        carrito[carrito.indexOf(carrito.find(element => element.id == array.id))].cantidad++
+        carrito[carrito.indexOf(carrito.find(element => element.id == array.id))].cantidad+=f;
         setCarritoID(carrito)
     } else {
+        array.cantidad=f;
         carrito.push(array)
         setCarritoID(carrito)
     }
 }
 
+function imprimirImagenes(array2){
+    let probando = array2.images;
+    let vacio="";
+    for(let i = 0; i < probando.length; i++){ 
+        vacio +=`
+                    <div class="small-img-col">
+                        <img src="${probando[i]}" onclick="mostrarProducto(producto, ${i});" alt="image" class="small-img" width="100%">
+                     </div>
+        `
+    }
+    return vacio
+}
 
 function mostrarProducto(array, i){
     let htmlContentToAppend = "";
@@ -45,18 +58,7 @@ function mostrarProducto(array, i){
                 <div class="col-lg-5 col-md-12 col-12">
                     <img src="${array.images[i]}" alt="principal" id="imagenPrincipal" class="img-fluid w-100 pb-1">
                     <div class="small-img-group">
-                        <div class="small-img-col">
-                            <img src="${array.images[0]}" onclick="mostrarProducto(producto, 0);" alt="image" class="small-img" width="100%">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="${array.images[1]}" onclick="mostrarProducto(producto, 1);" alt="image" class="small-img" width="100%">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="${array.images[2]}" onclick="mostrarProducto(producto, 2);" alt="image" class="small-img" width="100%">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="${array.images[3]}" onclick="mostrarProducto(producto, 3);" alt="image" class="small-img" width="100%">
-                        </div>
+                        ${imprimirImagenes(array)}
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-12">
@@ -66,7 +68,10 @@ function mostrarProducto(array, i){
                     <p>Vendidos hasta el momento: ${array.soldCount}</p> 
                     <h4 class="mt-4 mb-3"><strong>Sobre este producto:</strong></h4> 
                         <p>${array.description}</p>
+                    <div>
+                    <input type="number" min="1" id="cantidadSumar" value="1">
                     <button class="btn btn-primary" type="button" id="btnCarrito" style="width="20px"">Agregar al Carrito</button>
+                    </div>
                 </div>
             </div>
             <br>
@@ -130,8 +135,10 @@ document.addEventListener("DOMContentLoaded", function(){
             producto.cantidad = 1;
             mostrarProducto(producto, 0);
             mostrarProductosRecomendados(producto);
+
             document.getElementById("btnCarrito").addEventListener("click", function(){
-                agregarCarrito(producto)
+                let cuantia = parseInt(document.getElementById("cantidadSumar").value)
+                agregarCarrito(producto, cuantia)
             });
         }
     });
@@ -143,3 +150,9 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     });
 })
+
+/*
+
+
+
+*/

@@ -62,10 +62,18 @@ document.addEventListener("DOMContentLoaded", function(){
         <a class="nav-link" href="sell.html">Vender</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="cart.html">Carrito</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="my-profile.html" id="usuario">hola</a>
+        <a class="nav-link flecha-menu" id="usuario">user</a>
+        <ul class="menu-desplegable">
+          <li>
+            <a class="nav-link" href="cart.html">Carrito</a>
+          </li>
+          <li>
+            <a class="nav-link" href="my-profile.html">Mi Perfil</a>
+          </li>
+          <li>
+            <a class="nav-link" href="login.html">Cerrar Sesion</a>
+          </li>
+        </ul>
       </li>
     </ul>
   </div>

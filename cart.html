@@ -17,6 +17,7 @@
   <main>
     <div class="container">
       <section class="container content-section">
+        <br>
         <h2>Carrito</h2>
           <div>
             <table class="table" id="tablita">
@@ -24,19 +25,59 @@
                 <th scope="col">Producto</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Cantidad</th>
+                <th scope="col">Subtotal</th>
                 <th scope="col">      </th>
                 <tbody id="lista">
                     
                 </tbody>
             </table>
-        <div >
-          <br>
-          <strong>Total</strong>
-          <span id="totalCompra"></span>
-      </div>
-      <br>
-      <button class="btn btn-primary" type="button">Comprar</button>
-    </div>
+            <div>
+              <br>
+              <h4>Tipo de Envio</h4>
+              <div>
+                <div>
+                  <input type="radio" id="premium" name="drone" value="premium" checked>
+                  <label for="premium"> Premium 2 a 5 dias (%15)</label>
+                </div>
+            
+                <div>
+                  <input type="radio" id="express" name="drone" value="express">
+                  <label for="express"> Express 5 a 8 dias (%7)</label>
+                </div>
+            
+                <div>
+                  <input type="radio" id="standart" name="drone" value="standart">
+                  <label for="standart"> Standart 12 a 15 dias (%5)</label>
+                </div>
+              </div><br>
+              <h4>Direccion de Envio</h4>
+              <div class="datos-envio">
+
+                <div style="width: 40%;">
+                  <label for="calle">Calle </label><br>
+                  <input class="form-control" name="calle" id="calle" type="text" placeholder="Tu calle">
+                </div>
+                <div style="width: 20%;">
+                  <label for="numeroCalle">Numero </label><br>
+                  <input class="form-control" name="numeroCalle" id="numeroCalle" type="number" placeholder="Numero">
+                </div>
+                
+              </div><br>
+                <div style="width: 40%;">
+                  <label for="esquina">Esquina </label><br> 
+                  <input class="form-control" name="esquina" id="esquina" type="text" placeholder="Esquina">
+                </div>
+           </div>
+            <div>
+             <br>
+             <strong>Total</strong>
+              <span id="totalCompra"></span>
+           </div>
+            <br>
+            <button class="btn btn-primary" type="button">Comprar</button>
+        </div>
+    </section>
+  </div>  
   </main>
   <footer class="text-muted">
     <div class="container">

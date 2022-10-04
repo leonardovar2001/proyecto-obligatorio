@@ -203,3 +203,49 @@ a.custom-card:hover {
   padding: 0.5rem;
   text-align: center;
 }
+
+.datos-envio{
+  display: flex;
+  gap: 20px;
+}
+
+.menu-desplegable{
+  position: absolute;
+  display: none;
+  list-style: none;
+  width: 200px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.nav-item:hover .menu-desplegable{
+  display: block;
+}
+
+.menu-desplegable li a{
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 15px 15px 15px 20px;
+}
+
+.miPerfilForm{
+  width: 650px;
+  background-color: #24303c;
+  padding: 40px;
+  border-radius: 5px;
+  color: white;
+}
+
+.controls{
+  width: 100%;
+  background-color: whitesmoke;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  border: 1px solid #1f63c5;
+  font-size: 18px;
+}
+
+.form-floating{
+  color: black;
+}
