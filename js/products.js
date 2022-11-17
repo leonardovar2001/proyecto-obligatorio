@@ -5,6 +5,15 @@ let currentCategoriesArray = [];
 let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
+let productosFiltrados = [];
+
+function filtrarLista(){
+    let filtro = document.getElementById("productSearch").value;
+    productosFiltrados = currentCategoriesArray.filter(elProducto =>{
+            return elProducto.name.toLowerCase().indexOf(filtro.toLowerCase()) > -1  || elProducto.description.toLowerCase().indexOf(filtro.toLowerCase()) > -1;
+    })
+    showCategoriesList(productosFiltrados);
+}
 
 function setProductID(id) {
     localStorage.setItem("productID", id);
@@ -36,7 +45,7 @@ function showCategoriesList(array){
             </div>
         </div>
         `
-            
+        console.log(car.image); 
         document.getElementById("cat-list-container").innerHTML=htmlContentToAppend;
     }
 }
@@ -54,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("clearRangeFilter").addEventListener("click", function(){
         document.getElementById("rangeFilterCountMin").value = "";
         document.getElementById("rangeFilterCountMax").value = "";
+        document.getElementById("productSearch").value = "";
 
         minCount = undefined;
         maxCount = undefined;
@@ -104,4 +114,7 @@ document.addEventListener("DOMContentLoaded", function(){
         showCategoriesList(listaFiltrada);
 
     });
+    document.getElementById("productSearch").addEventListener("input", function(){
+        filtrarLista()
+    })
 });

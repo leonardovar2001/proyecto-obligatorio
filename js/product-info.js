@@ -1,6 +1,7 @@
 let producto = [];
 let comentarios = [];
 let carrito = [];
+let comentarioNuevo = {};
 
 function setProductID(id) {
     localStorage.setItem('productID', id);
@@ -9,7 +10,7 @@ function setProductID(id) {
 
 function setCarritoID(array) {
     localStorage.setItem('carritoID', JSON.stringify(array));
-    //window.location = "product-info.html"
+    window.location = "cart.html"
 }
 
 function getCatID(){
@@ -106,6 +107,7 @@ function mostrarComentarios(array){
         `
         document.getElementById("valoracion").innerHTML=htmlContentToAppend;
     }
+    console.log(comentarios)
 }
 
 
@@ -125,6 +127,15 @@ function mostrarProductosRecomendados(array){
     }
 }
 
+function agregarComentario(){
+    comentarioNuevo = {};
+    comentarioNuevo.user = localStorage.getItem('user');
+    comentarioNuevo.dateTime = new Date;
+    comentarioNuevo.description = document.getElementById("nuevoComentario").value;
+    comentarioNuevo.score = document.getElementById("estrellas").value;
+    comentarios.push(comentarioNuevo);
+    mostrarComentarios(comentarios)
+}
 
 document.addEventListener("DOMContentLoaded", function(){
     let articulo = localStorage.getItem('productID');
@@ -149,6 +160,9 @@ document.addEventListener("DOMContentLoaded", function(){
             mostrarComentarios(comentarios);
         }
     });
+    document.getElementById("botonComentario").addEventListener("click", function(){
+        agregarComentario();
+    })
 })
 
 /*

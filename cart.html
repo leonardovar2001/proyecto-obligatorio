@@ -51,32 +51,118 @@
                 </div>
               </div><br>
               <h4>Direccion de Envio</h4>
+              <form id="datosFormulario">
               <div class="datos-envio">
 
                 <div style="width: 40%;">
                   <label for="calle">Calle </label><br>
-                  <input class="form-control" name="calle" id="calle" type="text" placeholder="Tu calle">
+                  <input class="form-control" name="calle" id="calle" type="text" placeholder="Tu calle" required>
+                  <div class="invalid-feedback">
+                    Ingresa una calle.
+                  </div>
                 </div>
                 <div style="width: 20%;">
                   <label for="numeroCalle">Numero </label><br>
-                  <input class="form-control" name="numeroCalle" id="numeroCalle" type="number" placeholder="Numero">
+                  <input class="form-control" name="numeroCalle" id="numeroCalle" type="number" placeholder="Numero" required>
+                  <div class="invalid-feedback">
+                    Ingresa un numero.
+                  </div>
                 </div>
                 
               </div><br>
                 <div style="width: 40%;">
                   <label for="esquina">Esquina </label><br> 
-                  <input class="form-control" name="esquina" id="esquina" type="text" placeholder="Esquina">
+                  <input class="form-control" name="esquina" id="esquina" type="text" placeholder="Esquina" required>
+                  <div class="invalid-feedback">
+                    Ingresa una esquina.
+                  </div>
                 </div>
-           </div>
-            <div>
-             <br>
-             <strong>Total</strong>
-              <span id="totalCompra"></span>
-           </div>
-            <br>
-            <button class="btn btn-primary" type="button">Comprar</button>
+           </div></form><br>
+           <hr><br>
+           <div>
+            <h4>Costos</h4><br>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <p style="float: right;" id="subtotalFinal">USD </p>
+                <p>Subtotal</p> 
+                <p>Costo unitario del producto por cantidad</p> 
+              </li>
+              <li class="list-group-item">
+                <p style="float: right;" id="costoEnvio">USD </p>
+                <p>Costo de Envio</p> 
+                <p>Segun el tipo de Envio</p> 
+              </li>
+              <li class="list-group-item">
+                <p style="float: right;" id="totalCompra">USD </p>
+                <p>Total ($)</p>  
+              </li>
+            </ul>
+            
+           </div><br>
+           <hr><br>
+           <h4>Forma de Pago</h4><br>
+           <div style="display:flex; gap: 10px;">
+            <p id="metodoEstado">No ha seleccionado nada</p>
+            <p data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="color: blue; text-decoration:underline; cursor: pointer">
+             Seleccionar
+            </p>
+          </div>
+          <div class="invalid-feedback" id="seleccionar">
+            Debe seleccionar una forma de pago.
+          </div>
+
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Forma de Pago</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <div>
+                      <input type="radio" id="tarjeta" name="drone2" value="tarjeta">
+                      <label for="tarjeta"> Tarjeta de Credito</label>
+                    </div><hr>
+                    <div>
+                      <div class="datos-envio">
+                      <div style="width: 45%;">
+                        <label for="numeroTarjeta">Numero de Tarjeta </label><br>
+                        <input class="form-control" name="numeroTarjeta" id="numeroTarjeta" type="text" placeholder="Tu numero">
+                      </div>
+                      <div style="width: 30%;">
+                        <label for="codigoSeguridad">Codigo de seg. </label><br>
+                        <input class="form-control" name="codigoSeguridad" id="codigoSeguridad" type="text" placeholder="Tu codigo">
+                      </div>
+                    
+                      </div><br>
+                    <div style="width: 45%;">
+                      <label for="vencimiento">Vencimiento (MM/AA) </label><br> 
+                      <input class="form-control" name="vencimiento" id="vencimiento" type="text" placeholder="Vencimiento de la tarjeta">
+                    </div></div>
+                  </div><br>
+                  <div>
+                    <input type="radio" id="banco" name="drone2" value="banco">
+                    <label for="banco"> Transferencia Bancaria</label>
+                  </div><hr>
+                  <div>
+                    <div style="width: 45%;">
+                      <label for="numeroCuenta">Numero de cuenta </label><br>
+                      <input class="form-control" name="numeroCuenta" id="numeroCuenta" type="text" placeholder="Tu numero">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+           <br><br>
+            <button class="btn btn-primary" type="button" id="pagar">Finalizar Compra</button>
         </div>
     </section>
+    <div id="alertaCompra"></div>
   </div>  
   </main>
   <footer class="text-muted">
