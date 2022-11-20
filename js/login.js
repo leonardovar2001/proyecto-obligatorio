@@ -1,3 +1,7 @@
+import {auth} from './firebase.js'
+import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+
+
 function login(){
     let usuario= document.getElementById('nombre').value;
     let contrasena= document.getElementById('contrasena').value;
@@ -16,7 +20,12 @@ function deslogear(){
 
 document.addEventListener('DOMContentLoaded', ()=>{
     deslogear();
-    document.getElementById('inicio').addEventListener('click', ()=>{
+    document.getElementById('inicio').addEventListener('click', () => {
         login();
+    })
+    document.getElementById('google').addEventListener("click", async() => {
+        const provider = new GoogleAuthProvider();
+        const credentials = await signInWithPopup(auth, provider)
+        console.log(credentials.user.displayName)
     })
 })
