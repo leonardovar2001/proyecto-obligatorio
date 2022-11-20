@@ -8,7 +8,7 @@ function login(){
 
     if(usuario!="" && contrasena!=""){
         localStorage.setItem('user', usuario);
-        location.href='products.html';
+        location.href='index.html';
     } else {
         alert("Usuario y contraseña son requeridos")
     }
@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     document.getElementById('google').addEventListener("click", async() => {
         const provider = new GoogleAuthProvider();
         const credentials = await signInWithPopup(auth, provider)
-        console.log(credentials.user.displayName)
+        localStorage.setItem('user', credentials.user.email);
+        location.href='index.html';
     })
 })
