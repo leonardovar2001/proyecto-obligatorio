@@ -5,12 +5,12 @@ let comentarioNuevo = {};
 
 function setProductID(id) {
     localStorage.setItem('productID', id);
-    window.location = "product-info.html"
+    window.location = "product-info.html";
 }
 
 function setCarritoID(array) {
     localStorage.setItem('carritoID', JSON.stringify(array));
-    window.location = "cart.html"
+    window.location = "cart.html";
 }
 
 function getCatID(){
@@ -20,21 +20,28 @@ function getCatID(){
 function getCarrito(){
     let listaCompra = localStorage.getItem('carritoID');
     if(listaCompra == null){
+        // si no hay nada en el localstorage dejo vacio el array carrito
+        // si no le ingreso la informacion guardada anteriormente
         carrito = [];
     } else {
         carrito = JSON.parse(listaCompra);
     }
 }
 
-function agregarCarrito(array, f){
+function agregarCarrito(array, f){//funcion para agregar un producto al carrito
     getCarrito();
-    if ((carrito.find(element => element.id == array.id)) != undefined){
+    if ((carrito.find(element => element.id == array.id)) != undefined){ //busco en el carrito si hay un producto con
+        // el mismo id del poducto que quiero agregar
+        // si es asi sumo la cantidad selecionada con anterioridad
+        // a la que ya habia y vuelvo a setear al local storage el carrito con los cambios
         carrito[carrito.indexOf(carrito.find(element => element.id == array.id))].cantidad+=f;
-        setCarritoID(carrito)
+        setCarritoID(carrito);
     } else {
+        // sino hay un producto que coincida con el requisito anterior
+        //sumo el producto al carrito y lo seteo al local storage
         array.cantidad=f;
-        carrito.push(array)
-        setCarritoID(carrito)
+        carrito.push(array);
+        setCarritoID(carrito);
     }
 }
 
@@ -48,7 +55,7 @@ function imprimirImagenes(array2){
                      </div>
         `
     }
-    return vacio
+    return vacio;
 }
 
 function mostrarProducto(array, i){
@@ -107,7 +114,6 @@ function mostrarComentarios(array){
         `
         document.getElementById("valoracion").innerHTML=htmlContentToAppend;
     }
-    console.log(comentarios)
 }
 
 
@@ -128,13 +134,14 @@ function mostrarProductosRecomendados(array){
 }
 
 function agregarComentario(){
+    // creo un nuevo objeto y le agrego las propiedades que necesita todo comentario
     comentarioNuevo = {};
     comentarioNuevo.user = localStorage.getItem('user');
     comentarioNuevo.dateTime = new Date;
     comentarioNuevo.description = document.getElementById("nuevoComentario").value;
     comentarioNuevo.score = document.getElementById("estrellas").value;
-    comentarios.push(comentarioNuevo);
-    mostrarComentarios(comentarios)
+    comentarios.push(comentarioNuevo); //pusheo este objeto en el array de comentarios
+    mostrarComentarios(comentarios);
 }
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -148,8 +155,8 @@ document.addEventListener("DOMContentLoaded", function(){
             mostrarProductosRecomendados(producto);
 
             document.getElementById("btnCarrito").addEventListener("click", function(){
-                let cuantia = parseInt(document.getElementById("cantidadSumar").value)
-                agregarCarrito(producto, cuantia)
+                let cuantia = parseInt(document.getElementById("cantidadSumar").value);
+                agregarCarrito(producto, cuantia);
             });
         }
     });
@@ -164,9 +171,3 @@ document.addEventListener("DOMContentLoaded", function(){
         agregarComentario();
     })
 })
-
-/*
-
-
-
-*/

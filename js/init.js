@@ -73,13 +73,13 @@ document.addEventListener("DOMContentLoaded", function(){
       </li>
     </ul>
   </div>
-</div>`
+</div>`;
 
-document.getElementById("locura").innerHTML=menu
+document.getElementById("locura").innerHTML=menu;
 
 let usuario = localStorage.getItem('user');
-    if(usuario == null){
-        alert("No hay usuario loggeado")
+    if(usuario == null){ //verifico si el usuario estado logueado sino lo esta lo redirijo al login
+        alert("No hay usuario loggeado");
         location.href = "login.html";
     } else {
         document.getElementById("usuario").innerHTML = usuario;

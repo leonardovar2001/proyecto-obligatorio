@@ -21,17 +21,18 @@ function setInfo(array){
     window.location = "my-profile.html"
 }
 
-function getInfo(){
+function getInfo(){//funcion para traer la informacion del local storage
     let informacionUsuario = localStorage.getItem('userInfo');
     if(informacionUsuario == undefined || informacionUsuario =='' || informacionUsuario == null){
         datos = [];
+        // si no hay nada en el local storage se configura un objeto con informacion por defecto
         datosNuevos.foto = "img/foto-perfil.png";
         datosNuevos.name = "";
         datosNuevos.segundoNombre = "";
         datosNuevos.apellido = "";
         datosNuevos.segundoApellido = "";
         datosNuevos.telefono = "";
-        datos.push(datosNuevos);
+        datos.push(datosNuevos); // y se pushea dicho objeto
     } else {
         datos = JSON.parse(informacionUsuario);
     }
@@ -89,8 +90,8 @@ function procesarFoto(event){
 
 function nuevoPerfil(){
     datos = [];
-    datosNuevos = {};
-    datosNuevos.foto = lectura.result;
+    datosNuevos = {}; //objeto donde se va a guardar los datos del usuario
+    datosNuevos.foto = lectura.result;//imagen en base 64
     datosNuevos.name = document.getElementById("nombre").value;
     datosNuevos.segundoNombre = document.getElementById("segundoNombre").value;
     datosNuevos.apellido = document.getElementById("apellido").value;

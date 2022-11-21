@@ -9,7 +9,8 @@ let productosFiltrados = [];
 
 function filtrarLista(){
     let filtro = document.getElementById("productSearch").value;
-    productosFiltrados = currentCategoriesArray.filter(elProducto =>{
+    productosFiltrados = currentCategoriesArray.filter(elProducto =>{ // uso la funcion filter para crear un nuevo array donde esten
+        //todos los productos que cumplieron una de las 2 condiciones que mande
             return elProducto.name.toLowerCase().indexOf(filtro.toLowerCase()) > -1  || elProducto.description.toLowerCase().indexOf(filtro.toLowerCase()) > -1;
     })
     showCategoriesList(productosFiltrados);
@@ -17,7 +18,7 @@ function filtrarLista(){
 
 function setProductID(id) {
     localStorage.setItem("productID", id);
-    window.location = "product-info.html"
+    window.location = "product-info.html";
 }
 
 function showCategoriesList(array){
@@ -45,7 +46,6 @@ function showCategoriesList(array){
             </div>
         </div>
         `
-        console.log(car.image); 
         document.getElementById("cat-list-container").innerHTML=htmlContentToAppend;
     }
 }
@@ -105,16 +105,17 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
     document.getElementById("rangeFilterCount").addEventListener("click", function(){
-
+        //tomo los 2 valores, el minimo y el maximo
         minCount = document.getElementById("rangeFilterCountMin").value;
         maxCount = document.getElementById("rangeFilterCountMax").value;
-        const prueba= currentCategoriesArray;
-        let listaFiltrada = prueba.filter(categoria => categoria.cost >= minCount && categoria.cost <= maxCount);
-        listaFiltrada.sort((ant,sig)=>ant.cost-sig.cost);
+        // creo un nuevo array en base a las condiciones de que el precio del producto no supere el maximo
+        // ni sea menor al minimo. Ambas deben cumplirse
+        let listaFiltrada = currentCategoriesArray.filter(categoria => categoria.cost >= minCount && categoria.cost <= maxCount);
+        listaFiltrada.sort((ant,sig)=>ant.cost-sig.cost); // las ordeno y envio
         showCategoriesList(listaFiltrada);
 
     });
     document.getElementById("productSearch").addEventListener("input", function(){
-        filtrarLista()
+        filtrarLista();
     })
 });
